@@ -16,12 +16,22 @@ pipeline {
 
             }
         }
+		
+		stage('Pre Deploy'){
+            steps {
+                withMaven(maven : 'apache-maven'){
+                        sh "mvn test"
+                }
+
+            }
+        }
         stage('Deploy') {
             steps {
                withMaven(maven : 'apache-maven'){
                         sh "mvn deploy"
                 }
 
+        
             }
         }
     }
